@@ -1,14 +1,27 @@
 {
-  "name": "backend",
+  "name": "shop",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Backend of the eshop",
+  "main": "app.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HarsimratKohli/Shop.git"
   },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HarsimratKohli/Shop/issues"
+  },
+  "homepage": "https://github.com/HarsimratKohli/Shop#readme",
   "dependencies": {
-    "prettier": "^2.5.1"
+    "dotenv": "^14.3.2",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.8",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15"
   }
 }
