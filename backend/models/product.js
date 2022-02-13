@@ -1,14 +1,58 @@
 const mongoose = require('mongoose');
 
-//Schemas for mongoose
+//Schemas for database
 const productSchema = mongoose.Schema({
-  name: String,
-  image: String,
-  countInStock: {
-    type: Number,
-    required: true,
-  }
-});
+    name: {
+        type: String,
+        required: true    
+    },
+    description: {
+        type: String,
+        required: true    
+    },
+    richDescription: {
+        type: String,
+        default: ''    
+    },
+    image: {
+        type: String,
+        default: ''    
+    },
+    images: [{
+        type: String
+    }],
+    brand: {
+        type: String,
+        default: ''    
+    },
+    price: {
+        type: Number,
+        default: 0   
+    },
+    category: {
+        type:  mongoose.Schema.Types.ObjectId,
+        ref: 'Category',
+        required: true   
+    },
+    countInStock: {
+        type: Number,
+        required: true,
+        min: 0,
+        max: 255
+    },
+    rating: {
+        type: Number,
+        default: 0
+    },
+    isFeatured: {
+        type: Boolean,
+        default: false
+    },
+    dateCreated: {
+        type: Date,
+        default: Date.now
+    }
+})
 
-//Models: for creating collection in nodejs
-exports.Product = mongoose.model('Product', productSchema);
+//Models for nodejs
+exports.Product = mongoose.model('Product',productSchema);
