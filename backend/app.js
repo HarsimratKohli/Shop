@@ -7,13 +7,20 @@ const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const cors =  require('cors');
+const authJWT = require('./helpers/jwt');
+const errorHandler = require('./helpers/error-handler');
 const app = express();
 
 //Middleware to handle frontend requests
 app.use(express.json());
 app.use(morgan("tiny"));
-// app.use(cors);
-// app.options("*",cors());
+app.use(authJWT());
+//Error Handling during authentication
+app.use(errorHandler);
+
+//Enable cross origin resource sharing
+app.use(cors());
+app.options("*",cors());
 
 //Routers
 const categoriesRouter = require('./routers/categories');

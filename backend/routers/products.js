@@ -30,11 +30,21 @@ router.get('/get/count', async (req, res) => {
   if (!productCount) {
     res.status(500).json({ success: false });
   }
-  res.send({
+  res.status(200).send({
     productCount: productCount,
   });
 });
 
+//Get featured products with limit
+router.get(`/get/featured/:count`, async (req, res) =>{
+  const count = req.params.count ? req.params.count : 0
+  const products = await Product.find({isFeatured: true}).limit(+count);
+
+  if(!products) {
+      res.status(500).json({success: false})
+  } 
+  res.status(200).send(products);
+})
 
 //----Setters----
 
@@ -64,7 +74,7 @@ router.post(`/`, async (req, res) => {
     if (!newProduct) {
       return res.status(500).send("Product cannot be created");
     }
-    return res.send(newProduct);
+    return res.status(201).send(newProduct);
   } catch (err) {
     return res.status(400).send(err);
   }
@@ -98,7 +108,7 @@ router.put("/:id", async (req, res) => {
 
   if (!product) return res.status(500).send("the product cannot be updated!");
 
-  res.send(product);
+  res.status(204).send(product);
 });
 
 //Delete product
