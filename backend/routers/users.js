@@ -122,6 +122,25 @@ router.put(`/:id`, async (req, res) => {
   }
 });
 
+//Delete a user
+router.delete(`/:id`, async (req, res) => {
+  try {
+    let user = await User.findByIdAndRemove(req.params.id);
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    } else {
+      return res
+        .status(200)
+        .json({ success: true, message: "User deleted" });
+    }
+  } catch (err) {
+    return res.status(400).json({ success: false, error: err });
+  }
+});
+
 //----Login
 router.post("/login", async (req, res) => {
   //Check user exists
