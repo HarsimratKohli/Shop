@@ -15,6 +15,8 @@ const app = express();
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(authJWT());
+//Making upload folder static
+app.use('/public/uploads', express.static(__dirname + '/public/uploads' ))
 //Error Handling during authentication
 app.use(errorHandler);
 
@@ -44,5 +46,5 @@ mongoose.connect(process.env.CONNECTION_STRING, {
   });
 
 app.listen(3000, () => {
-  console.log("server is running http://localhost:3000");
+  console.log("Server is running http://localhost:3000");
 });
